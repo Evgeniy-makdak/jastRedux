@@ -1,22 +1,34 @@
-let store = 0;
-
+let counter = document.getElementById('counter');
 const addBtn = document.getElementById('add');
 const subBtn = document.getElementById('sub');
+const asyncBtn = document.getElementById('async');
+const themeBtn = document.getElementById('theme');
 
-function addCounter() {
-    addBtn.addEventListener('click', () => {
-        store++
-        console.log(store);
-    })
+let state = 0;
+
+function render() {
+  counter.textContent = state.toString();
 }
 
-addCounter()
+addBtn.addEventListener('click', () => {
+  state++;
+  render();
+});
 
-function subCounter() {
-    subBtn.addEventListener('click', () => {
-        store--
-        console.log(store);
-    })
-}
+subBtn.addEventListener('click', () => {
+  state--;
+  render();
+});
 
-subCounter()
+asyncBtn.addEventListener('click', () => {
+  setTimeout(() => {
+    state++;
+    render();
+  }, 2000);
+});
+
+themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark')
+})
+
+render();
